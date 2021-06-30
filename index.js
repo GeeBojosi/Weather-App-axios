@@ -1,35 +1,35 @@
-const fetchData = async (location) => {
-    const { data } = await axios.get("https://api.openweathermap.org/data/2.5/weather", {
-        params: {
-            q: location,
-            appid: "c8add47e47aff6a67c033828ff8df90a"
-        }
-    });
+const searchForm = document.querySelector('#searchForm');
+const input = document.querySelector('#searchInput');
+const time = document.querySelector('#time-zone');
 
-    console.log(data);
-};
+const date = setInterval(() => {
+  time.innerHTML = new Date().toLocaleTimeString();
+}, 1000);
 
-const button = document.querySelector("#button");
-const input = document.querySelector("#input");
+async function getData(location) {
+  const config = {
+    params: {
+      q: location,
+      appid: 'c8add47e47aff6a67c033828ff8df90a',
+      units: 'metric',
+    },
+  };
+  const res = await axios.get(
+    'https://api.openweathermap.org/data/2.5/weather',
+    config
+  );
+  return res.data;
+}
 
-button.addEventListener("click", (e) => {
-    e.preventDefault();
-    fetchData(input.value);
-});
+async function render(e) {
+  e.preventDefault();
+  const data = await getData(input.value);
+  console.log(data);
+  const div = document.createElement('div');
+  div.innerHTML = `
+    <h3>${data.name}, ${data.sys.country}</h3>
+  `;
+  document.querySelector('#target').appendChild(div);
+}
 
-// const fetchData = () => {
-//     fetch("https://api.openweathermap.org/data/2.5/weather?q=Mafikeng,za&APPID=c8add47e47aff6a67c033828ff8df90a")
-//         .then((response) => {
-//             if (!response.ok) {
-//                 throw new Error(`Status code error: ${response.status}`);
-//             } else {
-//                 response.json().then((data) => {
-//                     console.log(data)
-//                 })
-//             }
-//         }).catch((error) => {
-//             console.log("Oops something wrong");
-//         });
-// };
-
-// fetchData();
+searchForm.addEventListener('submit', render);

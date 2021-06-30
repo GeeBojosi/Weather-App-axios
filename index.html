@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/2fcb29ebe6.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/2fcb29ebe6.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <h1 id="header">Weather/24</h1>
+      <div id="time-zone"></div>
+    </header>
     <div class="container">
-        <h1 id="header">The Mighty Weather App</h1>
-      <form>
-        <input id="input" type="text" placeholder="Search for a city...">
-        <button id="button" type="submit">Submit</button>
+      <form id="searchForm">
+        <input
+          type="text"
+          id="searchInput"
+          name="searchInput"
+          placeholder="Search City..."
+        />
+        <button>Search</button>
       </form>
-        <div></div>
-      </div>
-      
-      <section>
-        <div class="container">
-          <div class="results">
-            <h1>Mafikeng, za</h1>
-            <p class="temp-style">22 C&#730;</p>
-            <p>Scattered Clouds</p>  
-          </div>
-        </div>
-      </section>
-      
-      <footer class="footer">
-        <div class="container">
-            <a href="https://openweathermap.org/">Powered by: OpenWeatherMap</a>
-        </div>
-      </footer>
-      
-
+      <div id="target"></div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
