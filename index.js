@@ -54,14 +54,10 @@ root.innerHTML = `
         id="searchInput"
         name="searchInput"
         placeholder="Search City..."
-        required
+        
       />
       <button>Search</button>
     </form>
-    <button class="toggle-btn" id="toggle-btn">
-      <span>°C</span> /
-      <span>°F</span>
-    </button>
   </div>
   <div id="target" class="contents"></div>
 `;
@@ -73,11 +69,14 @@ const toggle = document.querySelector('#toggle-btn');
 
 const render = async e => {
   e.preventDefault();
+  if (input.value === '') {
+    alert('Please enter valid city name and press enter');
+    return;
+  }
   const data = await getData(input.value);
   const time = new Date();
-
+  console.log(data);
   content.innerHTML = '';
-  console.log(data.cod);
   const div = document.createElement('div');
   div.innerHTML = `
     <span class="date">${d_names[time.getDay()]}, ${time.getDate()} ${
@@ -95,9 +94,5 @@ const render = async e => {
   content.appendChild(div);
   input.value = '';
 };
-
-toggle.addEventListener('click', e => {
-  console.log('clicked');
-});
 
 searchForm.addEventListener('submit', render);
